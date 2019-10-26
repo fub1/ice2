@@ -121,5 +121,16 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+# img path setting
+
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
+
+# session age  10 min
+SESSION_COOKIE_AGE = 10*60
+# 关闭浏览器，则Cookie失效
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

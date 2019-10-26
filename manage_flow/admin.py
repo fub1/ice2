@@ -55,6 +55,9 @@ admin.site.register(ContentType, ContentTypeAdmin)
 
 from asset_info.models import *
 admin.site.register(AssetBasicInfo)
+admin.site.register(AssetFinanceHistory)
+admin.site.register(FinanceInfoType)
+admin.site.register(AssetPhysicalInfo)
 # admin.site.register(UsageInfo)
 from asset_usage.models import *
 admin.site.register(UsageInfoType)
