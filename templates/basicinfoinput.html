@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block css %}
+<link rel="stylesheet" href="{%static 'plugins/select2/select2.min.css' %}">
+<link rel="stylesheet" href="{% static 'js/plugins/layer/skin/layer.css' %}">
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datetimepicker.min.css' %}">
+{% endblock %}
+
+{% block content_main %}
+
+    <Div id="form">
+        <form action="\asset_info_from" method="post">
+            {% csrf_token %}
+            {{ obj.as_p }}
+            <input type="submit">
+         </form>
+    </Div>
+
+{% endblock %}

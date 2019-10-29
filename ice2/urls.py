@@ -18,11 +18,13 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import home as H
-from asset_info.views import f1,f2
+
+from asset_info.views import asset_info_from, f2, asset_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', H),
-    path('f1', f1),
+    path('f1', asset_info_from),
     path('f2', f2),
+    path('info', asset_list),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

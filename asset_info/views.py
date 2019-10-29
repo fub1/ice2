@@ -2,9 +2,9 @@ from django.shortcuts import render
 from .form import *
 from django.contrib.auth.decorators import login_required
 
-
+# 资产基本信息录入
 @login_required(login_url='/admin/login/')
-def f1(request):
+def asset_info_from(request):
     if request.method == "GET":
         obj = PhysicalInfoForm()
     if request.method == "POST":
@@ -15,7 +15,7 @@ def f1(request):
             return render(request, 'ok.html')
         else:
             print(obj.errors)
-    return render(request, "f001.html", locals())
+    return render(request, "basicinfoinput.html", locals())
 
 @login_required(login_url='/admin/login/')
 def f2(request):
@@ -30,3 +30,9 @@ def f2(request):
         else:
             print(obj.errors)
     return render(request, "f002.html", locals())
+
+@login_required(login_url='/admin/login/')
+def asset_list(request):
+    list_context = AssetBasicInfo.objects.all()
+    list_context = {'list_context': list_context}
+    return render(request, "2.html", list_context)

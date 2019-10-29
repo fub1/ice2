@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'plugins/datatables/jquery.dataTables.min.css' %}">
+    <link rel="stylesheet" href="{% static 'js/plugins/layer/skin/layer.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/select2/select2.min.css' %}">
+{% endblock %}
+
+{% block content_main %}
+<div class="box-body">
+                    <table id="dtbList" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr valign="middle">
+                            <th>ID</th>
+                            <th>名称</th>
+                            <th>资产号</th>
+                            <th>存货号</th>
+                            <th>采购订单</th>
+                            <th>管理组</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for foo in list_context %}
+                        <tr valign="middle">
+                             <td class="text-bold">{{ foo.item_id }}</td>
+                             <td class="text-bold">{{ foo.item_name }}</td>
+                             <td class="text-bold">{{ foo.item_drx_asset_nr }}</td>
+                             <td class="text-bold">{{ foo.item_drx_inventory_nr }}</td>
+                             <td class="text-bold">{{ foo.item_po }}</td>
+                             <td class="text-bold">{{ foo.item_user }}</td>
+                        </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+
+{% endblock %}
