@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .views import home as H
 
-from asset_info.views import asset_info_from, f2, asset_list
+from asset_info.views import asset_info_from, f2, asset_list, asset_details
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +27,5 @@ urlpatterns = [
     path('f1', asset_info_from),
     path('f2', f2),
     path('info', asset_list),
+    path('asset_detail', asset_details)
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

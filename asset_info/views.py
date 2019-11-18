@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from .form import *
+from asset_usage.models import *
+from asset_info import *
+from manage_unit.models import *
 from django.contrib.auth.decorators import login_required
 
 # 资产基本信息录入
@@ -17,6 +20,7 @@ def asset_info_from(request):
             print(obj.errors)
     return render(request, "basicinfoinput.html", locals())
 
+
 @login_required(login_url='/admin/login/')
 def f2(request):
     if request.method == "GET":
@@ -31,8 +35,25 @@ def f2(request):
             print(obj.errors)
     return render(request, "f002.html", locals())
 
+
 @login_required(login_url='/admin/login/')
 def asset_list(request):
-    list_context = AssetBasicInfo.objects.all()
+    login_mg = UserInfo.objects.values_list('user_manage_group', flat=True).filter(user=request.user).first()
+    list_context = AssetBasicInfo.objects.filter(item_user=login_mg)
+    if request.user.is_superuser:
+        list_context = AssetBasicInfo.objects.all()
+
     list_context = {'list_context': list_context}
     return render(request, "2.html", list_context)
+
+
+@login_required(login_url='/admin/login/')
+def asset_details(request):
+    login_mg = UserInfo.objects.values_list('user_manage_group', flat=True).filter(user=request.user).first()
+    print(login_mg)
+    user_asset_list = list((AssetBasicInfo.objects.values_list('item_id', flat=True).filter(item_user=login_mg)))
+    print(user_asset_list)
+    list_context = AssetFinanceHistory.objects.filter(asset_finance_history_item__in=user_asset_list)
+    print(list_context)
+    list_context = {'list_context': list_context}
+    return render(request, '3.html', list_context)

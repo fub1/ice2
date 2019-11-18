@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 from manage_unit.models import CostCenter as CC
+from manage_unit.models import ManageGroup as MG
 
 
 class AssetBasicInfo(models.Model):
@@ -24,7 +25,7 @@ class AssetBasicInfo(models.Model):
 '''
     item_id = models.BigAutoField(primary_key=True)
     item_name = models.CharField(max_length=100, blank=True, null=True)
-    item_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    item_user = models.ForeignKey(MG, on_delete=models.CASCADE)
     item_po = models.BigIntegerField(blank=True, null=True)
     item_purchase_cc = models.ForeignKey(CC, on_delete=models.CASCADE)
     item_drx_asset_nr = models.BigIntegerField(blank=True, null=True)
